@@ -7,10 +7,10 @@ We implement:
   - event sender
   
 # Wy use we a lib?
-Because, we want to developed lots of small "micro API", and we don't want to implement in echa API the same code. So we use one lib. That help us in maintaince...
+Because, we want to developed lots of small "micro API", and we don't want to implement in echa API the same code. So we use one lib. That help us in maintenance...
 
 # Example
-The lib is simple to use, there is a exampe:
+The lib is simple to use, there is a example:
 
 ```go
 package main
