@@ -6,6 +6,7 @@ import (
 	"context"
 	"sync"
 	"github.com/kataras/go-events"
+	"encoding/json"
 )
 var wg sync.WaitGroup
 
@@ -18,12 +19,11 @@ func (k *kel) Sub()  {
 	}
 	wg.Wait()
 	fmt.Println("Finished for loop")
+	wgi.Done();
 }
 
 
 func (k *kel) subEventTopic(topic string){
-
-	fmt.Println("Channel :: ", topic)
 	//Init config for kafka lib
 	r := kafka.NewReader(kafka.ReaderConfig{
 		Brokers:   []string{k.Adress},
@@ -39,9 +39,24 @@ func (k *kel) subEventTopic(topic string){
 			break
 		}
 		//Fire event (github.com/kataras/go-events)
+		// =========================== Calculate HASH ====================
+		data := &Event{}
+		err1 := json.Unmarshal([]byte(string(m.Value)), data)
+		if (err1 != nil){
+			fmt.Println("[ERROR] Recive a non JSON / Event. Ignore!")
+			return;
+		}
+
+		_, err2 := json.Marshal(data.D)
+		 if(err2 != nil){
+		 	fmt.Println("[ERROR] The data based on the recived event use a wrong json format.")
+		 }
+
+
+		//=================================================================
+
 		events.Emit(events.EventName(topic), m.Topic, m.Offset, m.Partition, string(m.Key), string(m.Value))
 	}
 	r.Close()
 	defer wg.Done()
-
 }

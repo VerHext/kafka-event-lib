@@ -1,10 +1,11 @@
 package main
 
 import (
+	"sync"
 	"fmt"
 )
 
-
+var wgi sync.WaitGroup
 
 // The KEL (KafkaEventLib) is the main config for the Producer / Coustumer
 type kel struct {
@@ -23,9 +24,5 @@ func (k *kel) Init(address string, ename string) {
 	}
 	k.Adress = address;
 	k.EName = ename;
-	fmt.Println("[I] Channel permission for topics :: ")
-	for i := 0; i < len(k.Channels); i++ {
-		fmt.Println( k.Channels[i] + "  ")
-	}
-	k.Sub();
+	fmt.Println("[KAFKA] START!")
 }
