@@ -1,4 +1,4 @@
-package ct
+package kafkaLib
 
 const (
 	UserLogedin = "USER_LOGIN"
