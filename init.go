@@ -8,7 +8,7 @@ import (
 var wgi sync.WaitGroup
 
 // The KEL (KafkaEventLib) is the main config for the Producer / Coustumer
-type kel struct {
+type Kel struct {
 
 	//Channels :: a list with alle channels, who the service / endpoints are used.
 	//The service can only use the channel that are  listen for the producer.
@@ -17,7 +17,7 @@ type kel struct {
 	EName string
 }
 //INIT | Define the main config for the lib
-func (k *kel) Init(address string, ename string) {
+func (k *Kel) Init(address string, ename string) {
 
 	if (address == "" || ename == "" ){
 		panic("Error, missing init");

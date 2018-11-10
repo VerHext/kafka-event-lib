@@ -17,7 +17,7 @@ type Event struct {
 }
 
 
-func (k *kel)SendEventToChannel(cchannel string, event interface{})  {
+func (k *Kel)SendEventToChannel(cchannel string, event interface{})  {
 	allowed := false;
 	for i := 0; i < len(k.Channels); i++ {
 		if (k.Channels[i] == cchannel){

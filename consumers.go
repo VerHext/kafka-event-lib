@@ -11,7 +11,7 @@ import (
 var wg sync.WaitGroup
 
 
-func (k *kel) Sub()  {
+func (k *Kel) Sub()  {
 	wg.Add(len(k.Channels))
 	//multi thread with gorutes
 	for i := 0; i < len(k.Channels); i++ {
@@ -23,7 +23,7 @@ func (k *kel) Sub()  {
 }
 
 
-func (k *kel) subEventTopic(topic string){
+func (k *Kel) subEventTopic(topic string){
 	//Init config for kafka lib
 	r := kafka.NewReader(kafka.ReaderConfig{
 		Brokers:   []string{k.Adress},
